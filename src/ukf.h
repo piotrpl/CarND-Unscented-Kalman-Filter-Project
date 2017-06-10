@@ -102,6 +102,37 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+
+
+
+  private:
+    // number of sigma points
+    int n_sigma_;
+
+    MatrixXd Xsig;
+
+    MatrixXd R_radar_;
+
+    MatrixXd R_laser_;
+
+    MatrixXd H_;
+
+    double NIS_radar_;
+
+    double NIS_laser_;
+
+    int n_z_radar_;
+
+    int n_z_laser_;
+
+    void CreateAugmentedSigmaPoints();
+
+    void PredictAugmentedSigmaPoints(double delta_t);
+
+    double NormalizeAngle(double angle);
+
+    double CalculateNIS(const MatrixXd& S, const VectorXd& z_diff);
 };
 
 #endif /* UKF_H */
